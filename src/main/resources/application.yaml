@@ -29,7 +29,6 @@ spring:
         batch_versioned_data: true
         connection.provider_disables_autocommit: true
         format_sql: true
-    database-platform: org.hibernate.dialect.CockroachDB201Dialect
     open-in-view: false
   artemis:
     mode: native
