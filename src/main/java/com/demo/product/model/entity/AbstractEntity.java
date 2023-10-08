@@ -3,7 +3,6 @@ package com.demo.product.model.entity;
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * Base entity class.
@@ -30,7 +28,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EntityListeners(AuditingEntityListener.class)
 public abstract class AbstractEntity<I extends Serializable> {
 
   public abstract I getId();
