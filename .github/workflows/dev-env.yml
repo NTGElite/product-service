@@ -33,3 +33,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
+      - name: Log in to the Container registry
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build and push Docker image
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: docker/build-push-action@v3
+        with:
+          context: ./
+          push: true
+          tags: ghcr.io/NTGElite/product:latest
