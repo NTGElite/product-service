@@ -34,16 +34,16 @@ public class KafkaConsumerListenerFactory<R> {
 
   private ConsumerFactory<String, R> consumerFactory(Class<R> requestClass,
                                                      KafkaConfigProperties properties) {
-    Map<String, Object> factoryProperties = new HashMap<>();
+    Map<String, Object> configurations = new HashMap<>();
     JsonDeserializer<R> valueDeserializer = new JsonDeserializer<>(requestClass, false);
     valueDeserializer.addTrustedPackages("*");
-    factoryProperties.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
-    factoryProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServer());
-    factoryProperties.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, properties.getMaxPartitionFetchBytes());
-    factoryProperties.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, properties.getRequestTimeoutMs());
-    factoryProperties.put(ConsumerConfig.GROUP_ID_CONFIG, properties.getGroupId());
-    factoryProperties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-    factoryProperties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-    return new DefaultKafkaConsumerFactory<>(factoryProperties, new StringDeserializer(), valueDeserializer);
+    configurations.put(JsonSerializer.ADD_TYPE_INFO_HEADERS, false);
+    configurations.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServer());
+    configurations.put(ConsumerConfig.MAX_PARTITION_FETCH_BYTES_CONFIG, properties.getMaxPartitionFetchBytes());
+    configurations.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, properties.getRequestTimeoutMs());
+    configurations.put(ConsumerConfig.GROUP_ID_CONFIG, properties.getGroupId());
+    configurations.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+    configurations.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
+    return new DefaultKafkaConsumerFactory<>(configurations, new StringDeserializer(), valueDeserializer);
   }
 }
