@@ -19,23 +19,23 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 public class KafkaTemplateFactory<T> {
 
   private ProducerFactory<String, T> producerFactory(KafkaConfigProperties properties) {
-    return new DefaultKafkaProducerFactory<>(getStringObjectMap(properties));
+    return new DefaultKafkaProducerFactory<>(getConfigurations(properties));
   }
 
   /**
-   * Create a {@link Map} of {@link String} as the property name and {@link Object} as a property value of Kafka configuration properties from {@link KafkaConfigurationProperties}
+   * Create a Map of configuration from system properties file.
    *
    * @param properties Kafka configuration
    * @return a {@link Map} of name and value of Kafka configuration properties
    */
-  public static Map<String, Object> getStringObjectMap(KafkaConfigProperties properties) {
-    Map<String, Object> kafkaProperties = new HashMap<>();
-    kafkaProperties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServer());
-    kafkaProperties.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, properties.getMaxRequestSize());
-    kafkaProperties.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, properties.getRequestTimeoutMs());
-    kafkaProperties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-    kafkaProperties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
-    return kafkaProperties;
+  public static Map<String, Object> getConfigurations(KafkaConfigProperties properties) {
+    Map<String, Object> configurations = new HashMap<>();
+    configurations.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getBootstrapServer());
+    configurations.put(ProducerConfig.MAX_REQUEST_SIZE_CONFIG, properties.getMaxRequestSize());
+    configurations.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, properties.getRequestTimeoutMs());
+    configurations.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+    configurations.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+    return configurations;
   }
 
   /**
