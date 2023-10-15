@@ -42,12 +42,12 @@ public class KafkaTemplateFactory<T> {
    * Create {@link KafkaTemplate} that sends message with {@link String} as key and a custom type as value to a give topic
    *
    * @param properties Kafka configuration
-   * @param topicName  Topic where the message is sent to
+   * @param topic  Topic where the message is sent to
    * @return a {@link KafkaTemplate} that sends message to a given topic
    */
-  public KafkaTemplate<String, T> getKafkaTemplate(KafkaConfigProperties properties, String topicName) {
+  public KafkaTemplate<String, T> getKafkaTemplate(KafkaConfigProperties properties, String topic) {
     KafkaTemplate<String, T> kafkaTemplate = new KafkaTemplate<>(producerFactory(properties));
-    kafkaTemplate.setDefaultTopic(topicName);
+    kafkaTemplate.setDefaultTopic(topic);
     return kafkaTemplate;
   }
 }

@@ -17,10 +17,10 @@ public class RequestTopicConfig {
   }
 
   @Bean
-  public NewTopic getExampleTopic(@Qualifier("example_topic") RequestTopic requestTopic) {
+  public NewTopic getExampleTopic(@Qualifier("example_topic") RequestTopic topic) {
     Map<String, String> topicConfig = new HashMap<>();
     topicConfig.put(TopicConfig.CLEANUP_POLICY_CONFIG, TopicConfig.CLEANUP_POLICY_DELETE);
-    return new NewTopic(requestTopic.getTopicName(), KafkaConstants.NUM_PARTITION,
+    return new NewTopic(topic.getTopicName(), KafkaConstants.NUM_PARTITION,
         KafkaConstants.REPLICATION_FACTOR).configs(topicConfig);
   }
 }
