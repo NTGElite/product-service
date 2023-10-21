@@ -1,0 +1,15 @@
+version: '3.4'
+
+networks:
+  roach-net:
+
+services:
+  node_1:
+    container_name: node_1
+    image: cockroachdb/cockroach:latest
+    command: start-single-node --insecure
+    volumes:
+      - /mnt/d/cockroach-local/cockroach-data:/cockroach/cockroach-data
+    ports:
+      - "26257:26257"
+      - "8087:8080"
