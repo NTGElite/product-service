@@ -66,3 +66,11 @@ logging:
           descriptor:
             sql:
               BasicBinder: ERROR
+kafka:
+  bootstrapServer: ${HOST}:${KAFKA_PORT}
+  groupId: ${GROUP_ID}
+  replyMessageMaximumSize: 100000000
+  maxRequestSize: 100000000
+  maxPartitionFetchBytes: 100000000
+  autoOffsetResetConfig: "earliest"
+  requestTimeoutMs: 60000
